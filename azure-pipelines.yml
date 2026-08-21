@@ -17,6 +17,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
             backendServiceArm: 'interview_connection'
             backendAzureRmResourceGroupName: 'rg7'
             backendAzureRmStorageAccountName: 'teststg78'
