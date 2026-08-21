@@ -6,12 +6,12 @@ terraform {
     }
 
   }
-  backend "azurerm" {
-    resource_group_name  = "rg7"
-    storage_account_name = "teststg78"
-    container_name       = "tfstatecontainer"
-    key                  = "ranjeet.tfstate"
-  }
+  # backend "azurerm" {
+  #   resource_group_name  = "rg7"
+  #   storage_account_name = "teststg78"
+  #   container_name       = "tfstatecontainer"
+  #   key                  = "ranjeet.tfstate"
+  # }
 }
 
 provider "azurerm" {
