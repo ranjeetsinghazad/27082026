@@ -19,7 +19,7 @@ stages:
             command: 'init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
             backendServiceArm: 'interview_connection'
-            backendAzureRmOverrideSubscriptionID: '$(System.DefaultWorkingDirectory)/env/dev'
+            backendAzureRmOverrideSubscriptionID: '9246877f-9bea-4e72-9d6d-6b6d49d180df'
             backendAzureRmResourceGroupName: 'rg7'
             backendAzureRmStorageAccountName: 'teststg78'
             backendAzureRmContainerName: 'tfstatecontainer'
