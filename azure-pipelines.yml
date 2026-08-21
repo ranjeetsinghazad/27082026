@@ -16,6 +16,11 @@ stages:
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
             command: 'init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
             backendServiceArm: 'interview_connection'
@@ -23,12 +28,7 @@ stages:
             backendAzureRmStorageAccountName: 'teststg78'
             backendAzureRmContainerName: 'tfstatecontainer'
             backendAzureRmKey: 'ranjeet.tfstate'
-      
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'validate'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            
   # - stage: 
   #   jobs:
   #     - job: 
