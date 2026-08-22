@@ -14,7 +14,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
             backendServiceArm: 'service_connection5'
             backendAzureRmResourceGroupName: 'rg5'
             backendAzureRmStorageAccountName: 'stg984'
@@ -24,7 +24,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
             
   # - stage: 
   #   jobs:
