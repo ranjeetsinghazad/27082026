@@ -10,6 +10,9 @@ stages:
     jobs:
       - job: 
         steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
@@ -23,6 +26,11 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            environmentServiceNameAzureRM: 'service_connection5'
             
   # - stage: 
   #   jobs:
