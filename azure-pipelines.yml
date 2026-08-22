@@ -2,7 +2,7 @@ trigger:
 - main
 - features/*
 
-pool: asr_pool
+pool: new5
   
 
 stages:
@@ -18,10 +18,10 @@ stages:
             provider: 'azurerm'
             command: 'init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
-            backendServiceArm: 'interview_connection'
-            backendAzureRmResourceGroupName: 'rg7'
-            backendAzureRmStorageAccountName: 'teststg78'
-            backendAzureRmContainerName: 'tfstatecontainer'
+            backendServiceArm: 'service_connection5'
+            backendAzureRmResourceGroupName: 'rg5'
+            backendAzureRmStorageAccountName: 'stg984'
+            backendAzureRmContainerName: 'container5'
             backendAzureRmKey: 'ranjeet.tfstate'
         - task: TerraformTask@5
           inputs:
