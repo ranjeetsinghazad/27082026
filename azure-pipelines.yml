@@ -10,6 +10,14 @@ stages:
     jobs:
       - job: 
         steps:
+        - task: AzureCLI@3
+          inputs:
+            connectionType: 'azureRM'
+            azureSubscription: 'service_connection5'
+            scriptType: 'ps'
+            scriptLocation: 'inlineScript'
+            inlineScript: 'winget install --id Microsoft.PowerShell --source winget'
+            powerShellErrorActionPreference: 'continue'
         - task: TerraformInstaller@1
           inputs:
             terraformVersion: 'latest'
