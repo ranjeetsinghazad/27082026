@@ -1,6 +1,6 @@
 trigger:
 - main
-- features/*
+# - features/*
 
 pool: new5
   
