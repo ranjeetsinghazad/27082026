@@ -4,9 +4,9 @@ trigger:
 
 pool: new5
 
-variables: 
-  service_connection: 'service_connection5'
-  source_workdirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+#variables: 
+  #service_connection: 'service_connection5'
+#  source_workdirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
 
 stages:
   - stage: 
