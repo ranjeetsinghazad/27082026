@@ -48,4 +48,5 @@ stages:
             provider: 'azurerm'
             command: 'apply'
             workingDirectory: '$(source_workdirectory)'
+            commandOptions: '-auto-approve'
             environmentServiceNameAzureRM: '$(service_connection)'
