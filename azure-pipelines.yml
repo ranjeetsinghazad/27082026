@@ -1,0 +1,30 @@
+trigger:
+- main
+# - features/*
+
+pool: new5
+  
+
+stages:
+  - stage: 
+    jobs:
+      - job: 
+        steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            backendServiceArm: 'service_connection5'
+            backendAzureRmResourceGroupName: 'rg5'
+            backendAzureRmStorageAccountName: 'stg984'
+            backendAzureRmContainerName: 'container5'
+            backendAzureRmKey: 'ranjeet.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
