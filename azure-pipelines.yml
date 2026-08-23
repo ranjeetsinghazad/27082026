@@ -6,7 +6,7 @@ pool: new5
 
 #variables: 
   #service_connection: 'service_connection5'
-#  source_workdirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+#  source_workdirectory: '$(System.DefaultWorkingDirectory)/env/dev'
 
 stages:
   - stage: 
@@ -18,7 +18,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
             backendServiceArm: 'service_connection5'
             backendAzureRmResourceGroupName: 'rg5'
             backendAzureRmStorageAccountName: 'stg984'
@@ -28,7 +28,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
 
   - stage: 
     jobs:
@@ -38,7 +38,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
             backendServiceArm: 'service_connection5'
             backendAzureRmResourceGroupName: 'rg5'
             backendAzureRmStorageAccountName: 'stg984'
@@ -48,6 +48,6 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'apply'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/environment/dev'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
             environmentServiceNameAzureRM: 'service_connection5'
             commandOptions: '-auto-approve' # Added to prevent the pipeline from hanging
