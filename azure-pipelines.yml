@@ -3,8 +3,9 @@ trigger:
 # - features/*
 
 pool: new5
-  
-
+variables: 
+  service_connection: 'service_connection5'
+  source_workdirectory: $(System.DefaultWorkingDirectory)/environment/dev
 stages:
   - stage: 
     jobs:
@@ -17,8 +18,8 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
-            backendServiceArm: 'service_connection5'
+            workingDirectory: '$(source_workdirectory)'
+            backendServiceArm: '$(service_connection)'
             backendAzureRmResourceGroupName: 'rg5'
             backendAzureRmStorageAccountName: 'stg984'
             backendAzureRmContainerName: 'container5'
@@ -27,7 +28,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+            workingDirectory: '$(source_workdirectory)'
   - stage: 
     jobs:
       - job: 
@@ -36,8 +37,8 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
-            backendServiceArm: 'service_connection5'
+            workingDirectory: '$(source_workdirectory)'
+            backendServiceArm: '$(service_connection)'
             backendAzureRmResourceGroupName: 'rg5'
             backendAzureRmStorageAccountName: 'stg984'
             backendAzureRmContainerName: 'container5'
@@ -46,5 +47,5 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'apply'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
-            environmentServiceNameAzureRM: 'service_connection5'
+            workingDirectory: '$(source_workdirectory)'
+            environmentServiceNameAzureRM: '$(service_connection)'
