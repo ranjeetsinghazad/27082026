@@ -1,0 +1,53 @@
+trigger:
+- main
+# - features/*
+
+pool: new5
+
+variables: 
+  service_connection: 'service_connection5'
+  source_workdirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+
+stages:
+  - stage: 
+    jobs:
+      - job: 
+        steps:
+        # TerraformInstaller task removed to prevent ENOENT error
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(source_workdirectory)'
+            backendServiceArm: '$(service_connection)'
+            backendAzureRmResourceGroupName: 'rg5'
+            backendAzureRmStorageAccountName: 'stg984'
+            backendAzureRmContainerName: 'container5'
+            backendAzureRmKey: 'ranjeet.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(source_workdirectory)'
+
+  - stage: 
+    jobs:
+      - job: 
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(source_workdirectory)'
+            backendServiceArm: '$(service_connection)'
+            backendAzureRmResourceGroupName: 'rg5'
+            backendAzureRmStorageAccountName: 'stg984'
+            backendAzureRmContainerName: 'container5'
+            backendAzureRmKey: 'ranjeet.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(source_workdirectory)'
+            environmentServiceNameAzureRM: '$(service_connection)'
+            commandOptions: '-auto-approve' # Added to prevent the pipeline from hanging
