@@ -1,0 +1,33 @@
+trigger: none
+# - features/*
+
+pool: anup_vmss_agent
+
+stages:
+  - stage: 
+    jobs:
+      - job: 
+        steps:
+        # TerraformInstaller task removed to prevent ENOENT error
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(source_workdirectory)/env/dev'
+            backendServiceArm: 'anup_service_connection'
+            backendAzureRmResourceGroupName: 'rg2'
+            backendAzureRmStorageAccountName: 'stgars'
+            backendAzureRmContainerName: 'container1'
+            backendAzureRmKey: 'ranjeet.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            workingDirectory: '$(source_workdirectory)/env/dev'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            commandOptions: '--auto-approve'
+            environmentServiceNameAzureRM: 'anup_service_connection'
+
