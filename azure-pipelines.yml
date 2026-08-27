@@ -1,53 +1,63 @@
-trigger:
-- main
-# - features/*
+trigger: none
 
-pool: new5
-
-variables: 
-  service_connection: 'service_connection5'
-  source_workdirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+pool:
+  name: anup_vmss_agent
 
 stages:
-  - stage: 
-    jobs:
-      - job: 
-        steps:
-        # TerraformInstaller task removed to prevent ENOENT error
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            workingDirectory: '$(source_workdirectory)'
-            backendServiceArm: '$(service_connection)'
-            backendAzureRmResourceGroupName: 'rg5'
-            backendAzureRmStorageAccountName: 'stg984'
-            backendAzureRmContainerName: 'container5'
-            backendAzureRmKey: 'ranjeet.tfstate'
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'validate'
-            workingDirectory: '$(source_workdirectory)'
+  - stage: Terraform
+    displayName: Terraform Deployment
 
-  - stage: 
     jobs:
-      - job: 
+      - job: TerraformJob
+        displayName: Terraform Init Validate Apply
+
         steps:
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            workingDirectory: '$(source_workdirectory)'
-            backendServiceArm: '$(service_connection)'
-            backendAzureRmResourceGroupName: 'rg5'
-            backendAzureRmStorageAccountName: 'stg984'
-            backendAzureRmContainerName: 'container5'
-            backendAzureRmKey: 'ranjeet.tfstate'
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            workingDirectory: '$(source_workdirectory)'
-            environmentServiceNameAzureRM: '$(service_connection)'
-            commandOptions: '-auto-approve' # Added to prevent the pipeline from hanging
+
+          # ==========================================
+          # Terraform Install
+          # ==========================================
+
+          - task: TerraformInstaller@1
+            displayName: Install Terraform
+            inputs:
+              terraformVersion: 'latest'
+
+          # ==========================================
+          # Terraform Init
+          # ==========================================
+
+          - task: TerraformTask@5
+            displayName: Terraform Init
+            inputs:
+              provider: azurerm
+              command: init
+              workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+              backendServiceArm: 'anup_service_connection'
+              backendAzureRmResourceGroupName: 'rg2'
+              backendAzureRmStorageAccountName: 'stgars'
+              backendAzureRmContainerName: 'container1'
+              backendAzureRmKey: 'ranjeet.tfstate'
+
+          # ==========================================
+          # Terraform Validate
+          # ==========================================
+
+          - task: TerraformTask@5
+            displayName: Terraform Validate
+            inputs:
+              provider: azurerm
+              command: validate
+              workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+
+          # ==========================================
+          # Terraform Apply
+          # ==========================================
+
+          - task: TerraformTask@5
+            displayName: Terraform Apply
+            inputs:
+              provider: azurerm
+              command: apply
+              commandOptions: '-auto-approve'
+              workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+              environmentServiceNameAzureRM: 'anup_service_connection'
