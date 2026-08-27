@@ -8,6 +8,9 @@ stages:
     jobs:
       - job: 
         steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
         # TerraformInstaller task removed to prevent ENOENT error
         - task: TerraformTask@5
           inputs:
