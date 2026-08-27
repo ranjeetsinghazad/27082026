@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  name: anup_vmss_agent
+  name: ars_agent_pool
 
 stages:
   - stage: Terraform
@@ -29,11 +29,11 @@ stages:
           - task: TerraformTask@5
             displayName: Terraform Init
             inputs:
-              provider: azurerm
-              command: init
+              provider: 'azurerm'
+              command: 'init'
               workingDirectory: '$(Build.SourcesDirectory)/env/dev'
               backendServiceArm: 'anup_service_connection'
-              backendAzureRmResourceGroupName: 'rg2'
+              backendAzureRmResourceGroupName: 'rg3'
               backendAzureRmStorageAccountName: 'stgars'
               backendAzureRmContainerName: 'container1'
               backendAzureRmKey: 'ranjeet.tfstate'
@@ -45,8 +45,8 @@ stages:
           - task: TerraformTask@5
             displayName: Terraform Validate
             inputs:
-              provider: azurerm
-              command: validate
+              provider: 'azurerm'
+              command: 'validate'
               workingDirectory: '$(Build.SourcesDirectory)/env/dev'
           
 
@@ -57,8 +57,8 @@ stages:
           - task: TerraformTask@5
             displayName: Terraform Apply
             inputs:
-              provider: azurerm
-              command: apply
-              commandOptions: '-auto-approve'
+              provider: 'azurerm'
+              command: 'apply'
               workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+              commandOptions: '-auto-approve'
               environmentServiceNameAzureRM: 'anup_service_connection'
