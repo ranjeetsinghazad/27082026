@@ -16,7 +16,7 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: '$(source_workdirectory)/env/dev'
+            workingDirectory: '$(source_workdirectory)'
             backendServiceArm: 'anup_service_connection'
             backendAzureRmResourceGroupName: 'rg2'
             backendAzureRmStorageAccountName: 'stgars'
