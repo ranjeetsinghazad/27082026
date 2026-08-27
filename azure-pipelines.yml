@@ -48,6 +48,7 @@ stages:
               provider: azurerm
               command: validate
               workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+          
 
           # ==========================================
           # Terraform Apply
