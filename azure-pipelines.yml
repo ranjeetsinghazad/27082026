@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  name: ars_agent_pool
+  name: new_anup_pool
 
 stages:
   - stage: Terraform
@@ -30,7 +30,7 @@ stages:
               command: 'init'
               workingDirectory: '$(Build.SourcesDirectory)/env/dev'
               backendServiceArm: 'anup_service_connection'
-              backendAzureRmResourceGroupName: 'rg3'
+              backendAzureRmResourceGroupName: 'rg6'
               backendAzureRmStorageAccountName: 'stgars'
               backendAzureRmContainerName: 'container1'
               backendAzureRmKey: 'ranjeet.tfstate'
