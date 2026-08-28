@@ -17,10 +17,7 @@ stages:
           # Terraform Install
           # ==========================================
 
-          - task: TerraformInstaller@1
-            displayName: Install Terraform
-            inputs:
-              terraformVersion: 'latest'
+  
 
           # ==========================================
           # Terraform Init
