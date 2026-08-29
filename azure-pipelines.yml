@@ -1,7 +1,7 @@
 trigger: none
 
 pool:
-  name: new_agent_pool_anup
+  name: new_anup_pool
 
 stages:
   - stage: Terraform
