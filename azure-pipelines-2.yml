@@ -1,0 +1,22 @@
+
+trigger:none
+
+
+pool: ars_agent_pool
+
+stages: 
+- stage:
+  jobs: 
+  - job:
+    steps
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/env/dev'
+        backendServiceArm: 'service_connection5'
+        backendAzureRmOverrideSubscriptionID: 'b7fb90a2-d10e-4015-8d7f-c6654cadc4b6'
+        backendAzureRmResourceGroupName: 'rg5'
+        backendAzureRmStorageAccountName: 'stg984'
+        backendAzureRmContainerName: 'container5'
+        backendAzureRmKey: 'ranjeet.tfstate'
