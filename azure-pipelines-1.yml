@@ -1,0 +1,54 @@
+trigger: none
+
+pool: ars_agent_pool
+
+stages:
+  - stage: Terraform
+    displayName: Terraform Deployment
+
+    jobs:
+      - job: TerraformJob
+        displayName: Terraform Init Validate Apply
+
+        steps:
+
+          # ==========================================
+          # Terraform Init
+          # ==========================================
+
+          - task: TerraformTask@5
+            displayName: Terraform Init
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+              backendServiceArm: 'service_connection5'
+              backendAzureRmResourceGroupName: 'rg9'
+              backendAzureRmStorageAccountName: 'stg984'
+              backendAzureRmContainerName: 'container1'
+              backendAzureRmKey: 'ranjeet.tfstate'
+
+          # ==========================================
+          # Terraform Validate
+          # ==========================================
+
+          - task: TerraformTask@5
+            displayName: Terraform Validate
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+              workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+          
+
+          # ==========================================
+          # Terraform Apply
+          # ==========================================
+
+          - task: TerraformTask@5
+            displayName: Terraform Apply
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              workingDirectory: '$(Build.SourcesDirectory)/env/dev'
+              commandOptions: '-auto-approve'
+              environmentServiceNameAzureRM: 'service_connection5'
