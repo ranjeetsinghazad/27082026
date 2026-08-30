@@ -1,7 +1,6 @@
 trigger: none
 
-pool:
-  name: anup_agent_pool
+pool: anup_agent_pool
 
 stages:
   - stage: Terraform
@@ -12,12 +11,6 @@ stages:
         displayName: Terraform Init Validate Apply
 
         steps:
-
-          # ==========================================
-          # Terraform Install
-          # ==========================================
-
-  
 
           # ==========================================
           # Terraform Init
